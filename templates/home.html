@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Heart Disease Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+            background: #f4f4f4;
+        }
+        .container {
+            background: #fff;
+            padding: 20px;
+            max-width: 500px;
+            margin: auto;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        button {
+            padding: 10px 15px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #218838;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e9ecef;
+            border-radius: 4px;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Heart Disease Prediction Form</h2>
+        <form action="{{ url_for('predict_datapoint') }}" method="POST">
+            <label for="age">Age:</label>
+            <input type="number" name="age" required>
+
+            <label for="sex">Sex (0 = Female, 1 = Male):</label>
+            <select name="sex" required>
+                <option value="0">Female</option>
+                <option value="1">Male</option>
+            </select>
+
+            <label for="chest_pain_type">Chest Pain Type (0–3):</label>
+            <input type="number" name="chest_pain_type" min="0" max="3" required>
+
+            <label for="resting_bp_s">Resting BP (systolic):</label>
+            <input type="number" name="resting_bp_s" required>
+
+            <label for="cholesterol">Cholesterol:</label>
+            <input type="number" name="cholesterol" required>
+
+            <label for="fasting_blood_sugar">Fasting Blood Sugar (0 = False, 1 = True):</label>
+            <select name="fasting_blood_sugar" required>
+                <option value="0">False</option>
+                <option value="1">True</option>
+            </select>
+
+            <label for="resting_ecg">Resting ECG (0–2):</label>
+            <input type="number" name="resting_ecg" min="0" max="2" required>
+
+            <label for="max_heart_rate">Max Heart Rate:</label>
+            <input type="number" name="max_heart_rate" required>
+
+            <label for="exercise_angina">Exercise Angina (0 = No, 1 = Yes):</label>
+            <select name="exercise_angina" required>
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+            </select>
+
+            <label for="oldpeak">Oldpeak (float value):</label>
+            <input type="number" step="any" name="oldpeak" required>
+
+            <label for="ST_slope">ST Slope (0–2):</label>
+            <input type="number" name="ST_slope" min="0" max="2" required>
+
+            <button type="submit">Predict</button>
+        </form>
+
+        <div class="result">
+            {% if results %}
+                Prediction Result: {{ results }}
+            {% else %}
+                Enter the details above and click Predict to see the result here.
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

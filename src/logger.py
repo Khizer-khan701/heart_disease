@@ -15,9 +15,5 @@ logging.basicConfig(
     level=logging.INFO
 )
 
-if __name__=="__main__":
-    try:
-        logging.info("execution started")
-    except Exception as e:
-        raise CustomException(e,sys)
+
 
